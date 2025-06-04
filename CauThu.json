@@ -1,0 +1,205 @@
+[
+    {
+        "name": "Altay Bayındır",
+        "jersey": 1,
+        "position": "GK",
+        "nationality": "Thổ Nhĩ Kỳ",
+        "team": "Manchester United"
+    },
+    {
+        "name": "Tom Heaton",
+        "jersey": 22,
+        "position": "GK",
+        "nationality": "Anh",
+        "team": "Manchester United"
+    },
+    {
+        "name": "André Onana",
+        "jersey": 24,
+        "position": "GK",
+        "nationality": "Cameroon",
+        "team": "Manchester United"
+    },
+    {
+        "name": "Victor Lindelöf",
+        "jersey": 2,
+        "position": "CB",
+        "nationality": "Thụy Điển",
+        "team": "Manchester United"
+    },
+    {
+        "name": "Noussair Mazraoui",
+        "jersey": 3,
+        "position": "RB",
+        "nationality": "Hà Lan",
+        "team": "Manchester United"
+    },
+    {
+        "name": "Matthijs de Ligt",
+        "jersey": 4,
+        "position": "CB",
+        "nationality": "Hà Lan",
+        "team": "Manchester United"
+    },
+    {
+        "name": "Harry Maguire",
+        "jersey": 5,
+        "position": "CB",
+        "nationality": "Anh",
+        "team": "Manchester United"
+    },
+    {
+        "name": "Lisandro Martínez",
+        "jersey": 6,
+        "position": "CB",
+        "nationality": "Argentina",
+        "team": "Manchester United"
+    },
+    {
+        "name": "Tyrell Malacia",
+        "jersey": 12,
+        "position": "LB",
+        "nationality": "Hà Lan",
+        "team": "Manchester United"
+    },
+    {
+        "name": "Patrick Dorgu",
+        "jersey": 13,
+        "position": "LB",
+        "nationality": "Đan Mạch",
+        "team": "Manchester United"
+    },
+    {
+        "name": "Leny Yoro",
+        "jersey": 15,
+        "position": "CB",
+        "nationality": "Pháp",
+        "team": "Manchester United"
+    },
+    {
+        "name": "Diogo Dalot",
+        "jersey": 20,
+        "position": "RB",
+        "nationality": "Bồ Đào Nha",
+        "team": "Manchester United"
+    },
+    {
+        "name": "Luke Shaw",
+        "jersey": 23,
+        "position": "LB",
+        "nationality": "Anh",
+        "team": "Manchester United"
+    },
+    {
+        "name": "Ayden Heaven",
+        "jersey": 26,
+        "position": "CB",
+        "nationality": "Anh",
+        "team": "Manchester United"
+    },
+    {
+        "name": "Jonny Evans",
+        "jersey": 35,
+        "position": "CB",
+        "nationality": "Bắc Ireland",
+        "team": "Manchester United"
+    },
+    {
+        "name": "Harry Amass",
+        "jersey": 41,
+        "position": "LB",
+        "nationality": "Anh",
+        "team": "Manchester United"
+    },
+    {
+        "name": "Tyler Fredricson",
+        "jersey": 55,
+        "position": "CB",
+        "nationality": "Anh",
+        "team": "Manchester United"
+    },
+    {
+        "name": "Mason Mount",
+        "jersey": 7,
+        "position": "AM",
+        "nationality": "Anh",
+        "team": "Manchester United"
+    },
+    {
+        "name": "Bruno Fernandes",
+        "jersey": 8,
+        "position": "AM",
+        "nationality": "Bồ Đào Nha",
+        "team": "Manchester United"
+    },
+    {
+        "name": "Christian Eriksen",
+        "jersey": 14,
+        "position": "CM",
+        "nationality": "Đan Mạch",
+        "team": "Manchester United"
+    },
+    {
+        "name": "Casemiro",
+        "jersey": 18,
+        "position": "DM",
+        "nationality": "Brasil",
+        "team": "Manchester United"
+    },
+    {
+        "name": "Manuel Ugarte",
+        "jersey": 25,
+        "position": "DM",
+        "nationality": "Uruguay",
+        "team": "Manchester United"
+    },
+    {
+        "name": "Kobbie Mainoo",
+        "jersey": 37,
+        "position": "CM",
+        "nationality": "Anh",
+        "team": "Manchester United"
+    },
+    {
+        "name": "Toby Collyer",
+        "jersey": 43,
+        "position": "DM",
+        "nationality": "Anh",
+        "team": "Manchester United"
+    },
+    {
+        "name": "Rasmus Højlund",
+        "jersey": 9,
+        "position": "ST",
+        "nationality": "Đan Mạch",
+        "team": "Manchester United"
+    },
+    {
+        "name": "Joshua Zirkzee",
+        "jersey": 11,
+        "position": "ST",
+        "nationality": "Hà Lan",
+        "team": "Manchester United"
+    },
+    {
+        "name": "Amad Diallo",
+        "jersey": 16,
+        "position": "RW",
+        "nationality": "Bờ Biển Ngà",
+        "team": "Manchester United"
+    },
+    {
+        "name": "Alejandro Garnacho",
+        "jersey": 17,
+        "position": "LW",
+        "nationality": "Argentina",
+        "team": "Manchester United"
+    },
+    {
+        "name": "Chido Obi-Martin",
+        "jersey": 56,
+        "position": "ST",
+        "nationality": "Anh",
+        "team": "Manchester United"
+    }
+]
