@@ -2,8 +2,6 @@ import tkinter as tk
 from tkinter import messagebox, simpledialog, ttk
 import json
 import os
-from PIL import Image, ImageTk
-
 
 JSON_FILE = 'CauThu.json'
 USERS_FILE = 'users.json'
@@ -37,7 +35,6 @@ class PlayerManager:
         self.login_window()
 
     def login_window(self):
-       
         for widget in self.root.winfo_children():
             widget.destroy()
 
@@ -45,7 +42,7 @@ class PlayerManager:
         login_frame.pack(expand=True)
 
         mu_label = tk.Label(login_frame, text='Manchester United', font=('Arial', 24, 'bold'), fg='red')
-        mu_label.grid(row=0, column=0, columnspan=2, pady=(0, 30)) # Đặt ở hàng 0, phía trên các trường nhập liệu
+        mu_label.grid(row=0, column=0, columnspan=2, pady=(0, 30))
 
         tk.Label(login_frame, text='Tên Đăng Nhập:', font=('Arial', 12)).grid(row=1, column=0, pady=10, sticky='w')
         self.username_entry = tk.Entry(login_frame, font=('Arial', 12), width=30)
@@ -56,6 +53,8 @@ class PlayerManager:
         self.password_entry.grid(row=2, column=1, pady=10)
 
         tk.Button(login_frame, text='Đăng Nhập', command=self.login, font=('Arial', 12), bg='#4CAF50', fg='white', width=15).grid(row=3, columnspan=2, pady=20)
+
+        tk.Button(login_frame, text='Đăng Ký', command=self.register_window, font=('Arial', 12), bg='#28A745', fg='white', width=15).grid(row=4, columnspan=2, pady=10)
 
     def login(self):
         username = self.username_entry.get()
@@ -72,23 +71,39 @@ class PlayerManager:
         if not found_user:
             messagebox.showerror('Lỗi', 'Tên đăng nhập hoặc mật khẩu không đúng!')
 
+    def register_window(self):
+        username = simpledialog.askstring("Đăng Ký", "Nhập tên đăng nhập:")
+        if username is None or any(user['username'] == username for user in self.users):
+            messagebox.showerror("Lỗi", "Tên đăng nhập đã tồn tại hoặc không hợp lệ.")
+            return
+
+        password = simpledialog.askstring("Đăng Ký", "Nhập mật khẩu:", show='*')
+        if password is None or len(password) < 6:
+            messagebox.showerror("Lỗi", "Mật khẩu phải có ít nhất 6 ký tự.")
+            return
+
+        # Assign a default role
+        new_user = {
+            'username': username,
+            'password': password,
+            'role': 'user'  # Default role
+        }
+        self.users.append(new_user)
+        write_data(USERS_FILE, self.users)
+        messagebox.showinfo("Thông báo", "Đăng ký thành công! Bạn có thể đăng nhập ngay.")
+
     def show_main_interface(self):
-        
         for widget in self.root.winfo_children():
             widget.destroy()
 
-        
         button_frame = tk.Frame(self.root, pady=10)
         button_frame.pack(fill='x')
 
-        
         tk.Button(button_frame, text='Đăng Xuất', command=self.logout, font=('Arial', 10), bg='#FF5733', fg='white').pack(side=tk.RIGHT, padx=10)
 
-        
         self.btn_view_all = tk.Button(button_frame, text='Xem Tất Cả Cầu Thủ', command=lambda: self.load_players(category='all'), font=('Arial', 10), bg='#007BFF', fg='white')
         self.btn_view_all.pack(side=tk.LEFT, padx=5)
 
-        
         self.btn_forwards = tk.Button(button_frame, text='Xem Tiền Đạo', command=lambda: self.load_players(category='Tiền Đạo'), font=('Arial', 10), bg='#007BFF', fg='white')
         self.btn_forwards.pack(side=tk.LEFT, padx=5)
 
@@ -101,8 +116,6 @@ class PlayerManager:
         self.btn_goalkeepers = tk.Button(button_frame, text='Xem Thủ Môn', command=lambda: self.load_players(category='Thủ Môn'), font=('Arial', 10), bg='#007BFF', fg='white')
         self.btn_goalkeepers.pack(side=tk.LEFT, padx=5)
 
-
-        
         if self.current_user and self.current_user['role'] == 'admin':
             self.btn_create = tk.Button(button_frame, text='Thêm Cầu Thủ MU', command=self.create_player, font=('Arial', 10), bg='#28A745', fg='white')
             self.btn_create.pack(side=tk.LEFT, padx=5)
@@ -113,7 +126,6 @@ class PlayerManager:
             self.btn_delete = tk.Button(button_frame, text='Xóa Cầu Thủ MU', command=self.delete_player, font=('Arial', 10), bg='#DC3545', fg='white')
             self.btn_delete.pack(side=tk.LEFT, padx=5)
 
-        
         columns = ("No", "Name", "Jersey", "Position", "Nationality", "Team")
         self.tree = ttk.Treeview(self.root, columns=columns, show='headings')
         
@@ -124,7 +136,6 @@ class PlayerManager:
         self.tree.heading("Nationality", text="Quốc Tịch")
         self.tree.heading("Team", text="Đội Bóng")
 
-        
         self.tree.column("No", width=50, anchor='center')
         self.tree.column("Name", width=180, anchor='w')
         self.tree.column("Jersey", width=80, anchor='center')
@@ -134,12 +145,10 @@ class PlayerManager:
 
         self.tree.pack(expand=True, fill='both', padx=10, pady=10)
 
-       
         scrollbar = ttk.Scrollbar(self.tree, orient="vertical", command=self.tree.yview)
         self.tree.configure(yscrollcommand=scrollbar.set)
         scrollbar.pack(side='right', fill='y')
 
-        
         self.load_players(category='all')
 
     def logout(self):
@@ -148,11 +157,9 @@ class PlayerManager:
         self.login_window()
 
     def load_players(self, category=None):
-        
         for row in self.tree.get_children():
             self.tree.delete(row)
-            
-       
+
         position_mapping = {
             'Tiền Đạo': ['ST', 'LW', 'RW', 'SS'],
             'Tiền Vệ': ['CM', 'AM', 'DM', 'RM', 'LM'],
@@ -160,17 +167,12 @@ class PlayerManager:
             'Thủ Môn': ['GK']
         }
 
-       
         mu_players = [p for p in self.players if p.get('team') == 'Manchester United']
-        
-        
+
         if category and category != 'all':
-            
             allowed_positions = position_mapping.get(category, [])
-            
             mu_players = [p for p in mu_players if p.get('position', '').upper() in allowed_positions]
-            
-      
+
         for i, player in enumerate(mu_players):
             self.tree.insert("", "end", values=(
                 i + 1,
@@ -188,23 +190,19 @@ class PlayerManager:
         jersey = simpledialog.askinteger('Thêm Cầu Thủ MU', 'Nhập số áo:')
         if jersey is None: return
             
-       
         current_mu_players = [p for p in self.players if p.get('team') == 'Manchester United']
         if any(p['jersey'] == jersey for p in current_mu_players):
             messagebox.showerror("Lỗi", f"Số áo {jersey} đã tồn tại trong đội Manchester United. Vui lòng chọn số khác.")
             return
 
-        
         position = simpledialog.askstring('Thêm Cầu Thủ MU', 'Nhập vị trí (ví dụ: ST, CM, CB, GK):')
         if position is None: return
 
         nationality = simpledialog.askstring('Thêm Cầu Thủ MU', 'Nhập quốc tịch:')
         if nationality is None: return
             
-        
         team = "Manchester United"
 
-        
         if name and jersey is not None and position and nationality:
             new_player = {
                 'name': name,
@@ -246,13 +244,11 @@ class PlayerManager:
         jersey = simpledialog.askinteger('Cập Nhật Cầu Thủ MU', 'Nhập số áo mới:', initialvalue=player.get('jersey', ''))
         if jersey is None: return
             
-       
         for i, p in enumerate(self.players):
             if i != original_player_index and p.get('jersey') == jersey and p.get('team') == 'Manchester United':
                 messagebox.showerror("Lỗi", f"Số áo {jersey} đã tồn tại trong đội Manchester United. Vui lòng chọn số khác.")
                 return
 
-        
         position = simpledialog.askstring('Cập Nhật Cầu Thủ MU', 'Nhập vị trí mới (ví dụ: ST, CM, CB, GK):', initialvalue=player.get('position', ''))
         if position is None: return
 
@@ -261,7 +257,6 @@ class PlayerManager:
 
         team = "Manchester United" 
 
-        
         if name and jersey is not None and position and nationality:
             self.players[original_player_index] = {
                 'name': name,
